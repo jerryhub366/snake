@@ -1,66 +1,74 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>贪吃蛇游戏</title>
+    <title data-i18n="game_title">贪吃蛇游戏</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 </head>
 <body>
     <div class="container">
         <header>
-            <h1>贪吃蛇游戏</h1>
+            <h1 data-i18n="game_title">贪吃蛇游戏</h1>
+            <div class="language-selector">
+                <label for="language-select" data-i18n="language">语言:</label>
+                <select id="language-select">
+                    <option value="zh">中文</option>
+                    <option value="en">English</option>
+                    <option value="es">Español</option>
+                </select>
+            </div>
         </header>
         
         <div class="game-container">
             <div class="game-panel">
                 <div class="score-board">
-                    <div class="current-score">当前得分: <span id="current-score">0</span></div>
-                    <div class="high-score">最高分: <span id="high-score">0</span></div>
+                    <div class="current-score"><span data-i18n="current_score">当前得分</span>: <span id="current-score">0</span></div>
+                    <div class="high-score"><span data-i18n="high_score">最高得分</span>: <span id="high-score">0</span></div>
                 </div>
                 
                 <div class="canvas-container">
                     <canvas id="game-canvas"></canvas>
                     <div id="game-message" class="game-message">
-                        <h2>贪吃蛇</h2>
-                        <p>按空格键或点击开始按钮开始游戏</p>
-                        <button id="start-button">开始游戏</button>
+                        <h2 data-i18n="game_title">贪吃蛇游戏</h2>
+                        <p data-i18n="start_message">按空格键或点击开始按钮开始游戏</p>
+                        <button id="start-button" data-i18n="start_button">开始游戏</button>
                     </div>
                     <div id="game-over" class="game-over hidden">
-                        <h2>游戏结束</h2>
-                        <p>你的得分: <span id="final-score">0</span></p>
-                        <button id="restart-button">重新开始</button>
+                        <h2 data-i18n="game_over">游戏结束</h2>
+                        <p><span data-i18n="final_score">你的得分</span>: <span id="final-score">0</span></p>
+                        <button id="restart-button" data-i18n="restart_button">重新开始</button>
                     </div>
                 </div>
                 
                 <div class="game-controls">
                     <div class="control-group">
                         <div class="difficulty-control">
-                            <label for="difficulty">难度:</label>
+                            <label for="difficulty" data-i18n="difficulty">难度</label>:
                             <select id="difficulty">
-                                <option value="easy">简单</option>
-                                <option value="medium" selected>中等</option>
-                                <option value="hard">困难</option>
+                                <option value="easy" data-i18n="easy">简单</option>
+                                <option value="medium" selected data-i18n="medium">中等</option>
+                                <option value="hard" data-i18n="hard">困难</option>
                             </select>
                         </div>
                         <button id="pause-button" class="control-button" disabled>
-                            <i class="fas fa-pause"></i> 暂停
+                            <i class="fas fa-pause"></i> <span data-i18n="pause_button">暂停</span>
                         </button>
                     </div>
                 </div>
             </div>
             
             <div class="game-info">
-                <h2>游戏说明</h2>
+                <h2 data-i18n="game_info_title">游戏说明</h2>
                 <div class="info-content">
-                    <h3>如何玩</h3>
-                    <p>使用键盘方向键控制蛇的移动方向。在移动设备上，可以通过滑动屏幕来控制方向。</p>
-                    <h3>游戏规则</h3>
+                    <h3 data-i18n="how_to_play">如何玩</h3>
+                    <p data-i18n="controls_info">使用方向键控制蛇的方向。在移动设备上，您可以滑动屏幕来控制方向。</p>
+                    <h3 data-i18n="game_rules">游戏规则</h3>
                     <ul>
-                        <li>吃到食物可以增加得分和蛇的长度</li>
-                        <li>撞到墙壁或自己的身体会导致游戏结束</li>
-                        <li>难度越高，蛇移动速度越快</li>
+                        <li data-i18n="rule_1">吃食物可以增加分数和蛇的长度</li>
+                        <li data-i18n="rule_2">撞到墙壁或自己的身体会结束游戏</li>
+                        <li data-i18n="rule_3">更高的难度意味着蛇移动得更快</li>
                     </ul>
                 </div>
             </div>
@@ -76,13 +84,18 @@
         </div>
         
         <footer>
-            <p>&copy; 2025 snake 贪吃蛇游戏 - 一个TRAE创建的游戏</p>
+            <p data-i18n="footer_text">&copy; 2023 贪吃蛇游戏 - HTML5 Canvas 游戏</p>
         </footer>
     </div>
 
     <audio id="eat-sound" src="sounds/eat.mp3" preload="auto"></audio>
     <audio id="game-over-sound" src="sounds/game-over.mp3" preload="auto"></audio>
 
+    <!-- Language files -->
+    <script src="js/lang/en.js"></script>
+    <script src="js/lang/zh.js"></script>
+    <script src="js/lang/es.js"></script>
+    <script src="js/lang/i18n.js"></script>
     <script src="js/game.js"></script>
 </body>
 </html>

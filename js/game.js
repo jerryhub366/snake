@@ -29,6 +29,8 @@ const Difficulty = {
 };
 
 // 游戏类
+
+// 游戏类
 class SnakeGame {
     constructor() {
         // 获取DOM元素
@@ -45,6 +47,7 @@ class SnakeGame {
         this.gameOver = document.getElementById('game-over');
         this.eatSound = document.getElementById('eat-sound');
         this.gameOverSound = document.getElementById('game-over-sound');
+        this.languageSelect = document.getElementById('language-select');
         
         // 移动端控制按钮
         this.upButton = document.getElementById('up-button');
@@ -61,6 +64,10 @@ class SnakeGame {
         this.animationFrameId = null;
         this.lastRenderTime = 0;
         
+        // 初始化多语言支持
+        this.i18n = new I18n();
+        this.initLanguage();
+        
         // 初始化游戏设置
         this.initGame();
         this.setupEventListeners();
@@ -69,6 +76,14 @@ class SnakeGame {
         
         // 检测是否为移动设备
         this.checkMobileDevice();
+    }
+    
+    // 初始化语言设置
+    initLanguage() {
+        // 获取保存的语言偏好或使用默认语言
+        const savedLang = localStorage.getItem('snakeGameLanguage') || 'zh';
+        this.languageSelect.value = savedLang;
+        this.i18n.setLanguage(savedLang);
     }
     
     // 初始化游戏
@@ -536,6 +551,28 @@ class SnakeGame {
                 }
             }
         });
+        
+        // 语言切换
+        this.languageSelect.addEventListener('change', (e) => {
+            const lang = e.target.value;
+            this.i18n.setLanguage(lang);
+            localStorage.setItem('snakeGameLanguage', lang);
+            this.updateUILanguage();
+        });
+    }
+    
+    // 更新UI语言
+    updateUILanguage() {
+        // 更新按钮文本
+        this.startButton.textContent = this.i18n.get('start');
+        this.restartButton.textContent = this.i18n.get('restart');
+        this.pauseButton.textContent = this.state === GameState.PLAYING ? 
+            this.i18n.get('pause') : this.i18n.get('resume');
+            
+        // 更新其他UI元素
+        document.querySelector('label[for="current-score"]').textContent = this.i18n.get('score') + ':';
+        document.querySelector('label[for="high-score"]').textContent = this.i18n.get('highScore') + ':';
+    }
     }
     
     // 设置触摸屏控制
@@ -628,4 +665,15 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // 初始渲染
     game.render();
+    
+    // 初始化多语言支持
+    if (window.i18n) {
+        // 设置语言选择器的初始值
+        const languageSelect = document.getElementById('language-select');
+        if (languageSelect) {
+            const savedLang = localStorage.getItem('snakeGameLanguage') || 'zh';
+            languageSelect.value = savedLang;
+            window.i18n.setLanguage(savedLang);
+        }
+    }
 });
