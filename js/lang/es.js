@@ -1,5 +1,5 @@
 // Spanish language resource file
-const es = {
+var es = {
     // Game title and headers
     "game_title": "Juego de Serpiente",
     "game_info_title": "Instrucciones del Juego",

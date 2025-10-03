@@ -96,6 +96,17 @@
     <script src="js/lang/zh.js"></script>
     <script src="js/lang/es.js"></script>
     <script src="js/lang/i18n.js"></script>
+    <script>
+        // 初始化i18n对象
+        window.i18n = new I18n();
+        
+        // 设置语言选择器事件
+        document.getElementById('language-select').addEventListener('change', function() {
+            if (window.i18n) {
+                window.i18n.setLanguage(this.value);
+            }
+        });
+    </script>
     <script src="js/game.js"></script>
 </body>
 </html>
